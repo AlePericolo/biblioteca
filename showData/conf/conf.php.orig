@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alessandro
+ * Date: 04/01/19
+ * Time: 10.42
+ */
+if(!defined('SERVER')){
+
+    define("PROJECT_NAME", "perilNetwork");
+
+    /*LOCALE*/
+    define('SERVER','mysqllocal');
+    define('DBUSER','root');
+    define('DBPASSWORD','alessandro');
+    define('DBNAME','biblioteca');
+    define('DBCHARSET','latin1');
+    define('LOCALE', true);
+}

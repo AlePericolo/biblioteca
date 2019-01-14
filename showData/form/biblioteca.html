@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!--angularjs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!--controller-->
+    <script src="controller/bibliotecaController.js"></script>
+    <title>Biblioteca</title>
+</head>
+<body ng-app="biblioApp">
+
+<div  ng-controller="bibliotecaController" data-ng-init="caricaDati()">
+
+    <div class="container-fluid">
+        <h2>Biblioteca</h2>
+            Categorie <select class="form-control w-50" ng-options="c.codice as c.descrizione for c in categorie" ng-model="categoriaSelezionata"></select> -{{categoriaSelezionata}}- <br>
+            Sottocategorie <select class="form-control w-50" ng-options="s.codice as s.descrizione for s in sottocategorie | filter:{ codice_categoria: categoriaSelezionata }" ng-model="sottocategoriaSelezionata" ng-disabled="categoriaSelezionata == '' "></select> -{{sottocategoriaSelezionata}}-
+        <table class="table table-hover">
+            <thead>
+            <tr>
+
+                <th>CAT</th>
+                <th>SOTT</th>
+                <th>Titolo</th>
+                <th>Autore</th>
+                <th>Quantit&agrave;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata }">
+                <td>{{t.codice_categoria}}</td>
+                <td>{{t.codice_sottocategoria}}</td>
+                <td>{{t.titolo}}</td>
+                <td>{{t.autore}}</td>
+                <td>{{t.numero_copie}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

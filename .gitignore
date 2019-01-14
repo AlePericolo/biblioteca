@@ -1,0 +1,6 @@
+
+*.pyc
+
+importData/file/\.~lock\.biblioteca\.docx#
+
+showData/conf/conf\.php
