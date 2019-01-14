@@ -3,13 +3,13 @@ import MySQLdb
 class Database:
 
     def __init__(self):
-        self.connection = MySQLdb.connect("127.0.0.1", "root", "alessandro", "biblioteca")
+        self.connection = MySQLdb.connect("127.0.0.1", "root", "Password14!", "biblioteca")
         self.cursor = self.connection.cursor()
 
     # insert categoria ----------------------------------------------------------------------------------------------------
 
     def writeCategoria(self, codice, descrizione):
-        
+
         try:
             query_insert = "insert into categoria (codice, descrizione) values (%s,%s)"
 
@@ -17,9 +17,9 @@ class Database:
             self.cursor.execute(query_insert,(codice, descrizione.strip()))
             self.connection.commit()
             return "OK"
-        except Exception:
+        except Exception, e:
             self.connection.rollback()
-            return 'Errore Insert Categoria ' + Exception
+            return 'Errore Insert Categoria ' + str(e)
 
     # insert sottocategoria ----------------------------------------------------------------------------------------------------
 
@@ -32,9 +32,9 @@ class Database:
             self.cursor.execute(query_insert,(codiceCategoria, codice, descrizione.strip()))
             self.connection.commit()
             return "OK"
-        except Exception:
+        except Exception, e:
             self.connection.rollback()
-            return 'Errore Insert Sottocategoria ' + Exception
+            return 'Errore Insert Sottocategoria ' + str(e)
 
     # insert testo ----------------------------------------------------------------------------------------------------
 
@@ -47,9 +47,9 @@ class Database:
             self.cursor.execute(query_insert,(codiceCategoria, codiceSottocategoria, autore, titolo, numero_copie))
             self.connection.commit()
             return "OK"
-        except Exception:
+        except Exception, e:
             self.connection.rollback()
-            return 'Error Insert Testo: ' + Exception
+            return 'Error Insert Testo: ' + str(e)
 
     # truncate table ---------------------------------------------------------------------------------------------------
 

@@ -20,20 +20,29 @@
     <div class="container-fluid">
         <h2>Biblioteca</h2>
             Categorie <select class="form-control w-50" ng-options="c.codice as c.descrizione for c in categorie" ng-model="categoriaSelezionata"></select> -{{categoriaSelezionata}}- <br>
-            Sottocategorie <select class="form-control w-50" ng-options="s.codice as s.descrizione for s in sottocategorie | filter:{ codice_categoria: categoriaSelezionata }" ng-model="sottocategoriaSelezionata" ng-disabled="categoriaSelezionata == '' "></select> -{{sottocategoriaSelezionata}}-
+            Sottocategorie <select class="form-control w-50" ng-options="s.codice as s.descrizione for s in sottocategorie | filter:{ codice_categoria: categoriaSelezionata }" ng-model="sottocategoriaSelezionata" ng-disabled="categoriaSelezionata == '' "></select> -{{sottocategoriaSelezionata}}-<br>
+            Cerca
         <table class="table table-hover">
             <thead>
             <tr>
 
                 <th>CAT</th>
                 <th>SOTT</th>
-                <th>Titolo</th>
-                <th>Autore</th>
+                <th>
+                    <div class="form-inline">
+                        Titolo <input type="text" class="form-control" ng-model="search.titolo"/>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-inline">
+                        Autore <input type="text" class="form-control" ng-model="search.autore"/>
+                    </div>
+                </th>
                 <th>Quantit&agrave;</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata }">
+            <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata } | filter:search">
                 <td>{{t.codice_categoria}}</td>
                 <td>{{t.codice_sottocategoria}}</td>
                 <td>{{t.titolo}}</td>

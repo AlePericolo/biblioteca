@@ -36,13 +36,13 @@ def checkLine(l):
         if codice in [0,100,200,300,400,500,600,700,800,900]:
             descrizioneCategoria = getDescrizioneCategoria(l)
             if len(descrizioneCategoria)>0:
-                db.writeCategoria(codice, descrizioneCategoria)
+                db.writeCategoria(str(codice), descrizioneCategoria)
             if codice > getCategoriaCode():
                 updateCategoria(codice)
         if codice not in [0,100,200,300,400,500,600,700,800,900] and codice != -1:
             descrizioneSottocategoria = getDescrizioneSottocategoria(codice, l)
             if len(descrizioneSottocategoria)>0:
-                db.writeSottocategoria(str(getCategoriaCode()), codice, descrizioneSottocategoria)
+                db.writeSottocategoria(str(getCategoriaCode()), str(codice), descrizioneSottocategoria)
             if codice > getSottocategoriaCode():
                 updateSottocategoria(codice)
         if codice == -1:
