@@ -42,7 +42,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata } | filter:search">
+            <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata } | filter:{ codice_sottocategoria sottocategoriaSelezionata } | filter:search">
                 <td>{{t.codice_categoria}}</td>
                 <td>{{t.codice_sottocategoria}}</td>
                 <td>{{t.titolo}}</td>
