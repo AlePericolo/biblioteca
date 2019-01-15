@@ -15,4 +15,11 @@ function __construct(PDO $pdo){
 	parent::__construct($pdo);
 }
 
+    public function findCategorie($typeResult = self::FETCH_OBJ)
+    {
+        $query = "select codice, concat(codice,' - ',descrizione) as descrizione from categoria";
+
+        return $this->createResultArray($query, null, $typeResult);
+    }
+
 } //close Class Categoria

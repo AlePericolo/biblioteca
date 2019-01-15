@@ -23,8 +23,8 @@ function caricaDati($request){
     $sottocategoria =  new Sottocategoria($pdo);
     $testo =  new Testo($pdo);
 
-    $result['categorie'] = $categoria->findAll(false, Categoria::FETCH_KEYARRAY);
-    $result['sottocategorie'] = $sottocategoria->findAll(false, Sottocategoria::FETCH_KEYARRAY);
+    $result['categorie'] = $categoria->findCategorie(Categoria::FETCH_KEYARRAY);
+    $result['sottocategorie'] = $sottocategoria->findSottocategorie(Sottocategoria::FETCH_KEYARRAY);
     $result['testi'] = $testo->findAlldescCatSott(Testo::FETCH_KEYARRAY);
 
     return json_encode($result);

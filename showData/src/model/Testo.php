@@ -20,7 +20,8 @@ public function findAlldescCatSott($typeResult = self::FETCH_OBJ)
     $query = "select testo.*, categoria.descrizione as cat_desc, sottocategoria.descrizione as sott_desc
                 from testo
                 inner join categoria on testo.codice_categoria = categoria.codice
-                inner join sottocategoria on testo.codice_sottocategoria = sottocategoria.codice";
+                inner join sottocategoria on testo.codice_sottocategoria = sottocategoria.codice
+                order by testo.codice_categoria, testo.codice_sottocategoria";
 
     return $this->createResultArray($query, null, $typeResult);
 }

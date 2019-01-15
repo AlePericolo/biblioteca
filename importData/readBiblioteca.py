@@ -23,6 +23,7 @@ def updateSottocategoria(s):
 #-----------------------------------------------------------------------------------------------------------------------
 
 def readFile(filename):
+    print 'START'
     with open(filename) as f:
         lines = f.readlines()
         for l in lines:

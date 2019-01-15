@@ -2,7 +2,7 @@
 /**
 * Developed by: Alessandro Pericolo
 * Date: 15/01/2019
-* Time: 09:23
+* Time: 16:17
 * Version: 0.1
 **/
 
@@ -22,7 +22,7 @@ protected $autore;
 protected $titolo;
 /** @var integer */
 protected $numero_copie;
-/** @var DateTime */
+/** @var integer */
 protected $anno_pubblicazione;
 /** @var string */
 protected $editore;
@@ -95,7 +95,7 @@ public function createObjKeyArray(array $keyArray){
 	if (isset($keyArray["autore"])) $this->autore = $keyArray["autore"];
 	if (isset($keyArray["titolo"])) $this->titolo = $keyArray["titolo"];
 	if (isset($keyArray["numero_copie"])) $this->numero_copie = $keyArray["numero_copie"];
-	if (isset($keyArray["anno_pubblicazione"]) && $keyArray["anno_pubblicazione"] != "") $this->anno_pubblicazione = date("Ymd", strtotime($keyArray["anno_pubblicazione"]));
+	if (isset($keyArray["anno_pubblicazione"])) $this->anno_pubblicazione = $keyArray["anno_pubblicazione"];
 	if (isset($keyArray["editore"])) $this->editore = $keyArray["editore"];
 }
 
@@ -138,7 +138,7 @@ return $this->pdo->exec(
   `autore` varchar(80) DEFAULT NULL,
   `titolo` varchar(255) DEFAULT NULL,
   `numero_copie` int(11) DEFAULT NULL,
-  `anno_pubblicazione` datetime DEFAULT NULL,
+  `anno_pubblicazione` int(4) DEFAULT NULL,
   `editore` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
@@ -236,14 +236,14 @@ public function setNumeroCopie($numero_copie){
 }
 
 /** 
-* @return DateTime
+* @return integer
 **/
 public function getAnnoPubblicazione(){
 	 return $this->anno_pubblicazione;
 }
 
 /** 
-* @param DateTime $anno_pubblicazione
+* @param integer $anno_pubblicazione
 **/
 public function setAnnoPubblicazione($anno_pubblicazione){
 	 $this->anno_pubblicazione = $anno_pubblicazione;
