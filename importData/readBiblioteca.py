@@ -33,13 +33,13 @@ def checkLine(l):
     if len(l.decode('utf-8').strip().replace(" ", "")) > 0:
         db = Database.Database()
         codice = getCode(l)
-        if codice in [0,100,200,300,400,500,600,700,800,900]:
+        if codice in ["000","100","200","300","400","500","600","700","800","900"]:
             descrizioneCategoria = getDescrizioneCategoria(l)
             if len(descrizioneCategoria)>0:
                 db.writeCategoria(str(codice), descrizioneCategoria)
             if codice > getCategoriaCode():
                 updateCategoria(codice)
-        if codice not in [0,100,200,300,400,500,600,700,800,900] and codice != -1:
+        if codice not in ["000","100","200","300","400","500","600","700","800","900"] and codice != -1:
             descrizioneSottocategoria = getDescrizioneSottocategoria(codice, l)
             if len(descrizioneSottocategoria)>0:
                 db.writeSottocategoria(str(getCategoriaCode()), str(codice), descrizioneSottocategoria)
@@ -64,11 +64,11 @@ def checkLine(l):
 def getCode(s):
     code = -1
     try:
-        code = int(s.decode('utf-8').strip().replace(" ", "")[1:4])
+        code = s.decode('utf-8').strip().replace(" ", "")[1:4]
     except:
         pass
     try:
-        code = int(s.decode('utf-8').strip().replace(" ","")[:3])
+        code = s.decode('utf-8').strip().replace(" ","")[:3]
     except:
         pass
     return code

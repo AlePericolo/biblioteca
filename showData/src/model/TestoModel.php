@@ -1,8 +1,8 @@
 <?php
 /**
 * Developed by: Alessandro Pericolo
-* Date: 14/01/2019
-* Time: 17:34
+* Date: 15/01/2019
+* Time: 09:23
 * Version: 0.1
 **/
 
@@ -12,9 +12,9 @@ class TestoModel extends AbstractModel {
 
 /** @var integer PrimaryKey */
 protected $id;
-/** @var integer */
+/** @var string */
 protected $codice_categoria;
-/** @var integer */
+/** @var string */
 protected $codice_sottocategoria;
 /** @var string */
 protected $autore;
@@ -22,6 +22,10 @@ protected $autore;
 protected $titolo;
 /** @var integer */
 protected $numero_copie;
+/** @var DateTime */
+protected $anno_pubblicazione;
+/** @var string */
+protected $editore;
 
 /* CONSTRUCTOR ------------------------------------------------------------------------------------------------------ */
 
@@ -75,6 +79,8 @@ public function createKeyArray(){
 	if (isset($this->autore)) $keyArray["autore"] = $this->autore;
 	if (isset($this->titolo)) $keyArray["titolo"] = $this->titolo;
 	if (isset($this->numero_copie)) $keyArray["numero_copie"] = $this->numero_copie;
+	if (isset($this->anno_pubblicazione)) $keyArray["anno_pubblicazione"] = $this->anno_pubblicazione;
+	if (isset($this->editore)) $keyArray["editore"] = $this->editore;
 	return $keyArray;
 }
 
@@ -89,6 +95,8 @@ public function createObjKeyArray(array $keyArray){
 	if (isset($keyArray["autore"])) $this->autore = $keyArray["autore"];
 	if (isset($keyArray["titolo"])) $this->titolo = $keyArray["titolo"];
 	if (isset($keyArray["numero_copie"])) $this->numero_copie = $keyArray["numero_copie"];
+	if (isset($keyArray["anno_pubblicazione"]) && $keyArray["anno_pubblicazione"] != "") $this->anno_pubblicazione = date("Ymd", strtotime($keyArray["anno_pubblicazione"]));
+	if (isset($keyArray["editore"])) $this->editore = $keyArray["editore"];
 }
 
 /** 
@@ -103,6 +111,8 @@ public function getEmptyKeyArray(){
 	$emptyKeyArray["autore"] = "";
 	$emptyKeyArray["titolo"] = "";
 	$emptyKeyArray["numero_copie"] = "";
+	$emptyKeyArray["anno_pubblicazione"] = "";
+	$emptyKeyArray["editore"] = "";
 	return $emptyKeyArray;
 }
 
@@ -111,7 +121,7 @@ public function getEmptyKeyArray(){
 * @return string
 **/
 public function getListColumns(){
-	return "id, codice_categoria, codice_sottocategoria, autore, titolo, numero_copie";
+	return "id, codice_categoria, codice_sottocategoria, autore, titolo, numero_copie, anno_pubblicazione, editore";
 }
 
 /* CREATE TABLE ----------------------------------------------------------------------------------------------------- */
@@ -123,13 +133,15 @@ public function createTable(){
 return $this->pdo->exec(
 "CREATE TABLE `testo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codice_categoria` int(11) NOT NULL,
-  `codice_sottocategoria` int(11) NOT NULL,
+  `codice_categoria` varchar(3) NOT NULL,
+  `codice_sottocategoria` varchar(3) NOT NULL,
   `autore` varchar(45) DEFAULT NULL,
-  `titolo` varchar(100) DEFAULT NULL,
+  `titolo` varchar(45) DEFAULT NULL,
   `numero_copie` int(11) DEFAULT NULL,
+  `anno_pubblicazione` datetime DEFAULT NULL,
+  `editore` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1062 DEFAULT CHARSET=latin1"
+) ENGINE=InnoDB DEFAULT CHARSET=latin1"
 );
 }
 
@@ -150,31 +162,33 @@ public function setId($id){
 }
 
 /** 
-* @return integer
+* @return string
 **/
 public function getCodiceCategoria(){
 	 return $this->codice_categoria;
 }
 
 /** 
-* @param integer $codice_categoria
-**/
-public function setCodiceCategoria($codice_categoria){
-	 $this->codice_categoria = $codice_categoria;
+* @param string $codice_categoria
+* @param int $encodeType
+ **/
+public function setCodiceCategoria($codice_categoria, $encodeType = self::STR_DEFAULT){
+	 $this->codice_categoria = $this->decodeString($codice_categoria, $encodeType);
 }
 
 /** 
-* @return integer
+* @return string
 **/
 public function getCodiceSottocategoria(){
 	 return $this->codice_sottocategoria;
 }
 
 /** 
-* @param integer $codice_sottocategoria
-**/
-public function setCodiceSottocategoria($codice_sottocategoria){
-	 $this->codice_sottocategoria = $codice_sottocategoria;
+* @param string $codice_sottocategoria
+* @param int $encodeType
+ **/
+public function setCodiceSottocategoria($codice_sottocategoria, $encodeType = self::STR_DEFAULT){
+	 $this->codice_sottocategoria = $this->decodeString($codice_sottocategoria, $encodeType);
 }
 
 /** 
@@ -219,6 +233,35 @@ public function getNumeroCopie(){
 **/
 public function setNumeroCopie($numero_copie){
 	 $this->numero_copie = $numero_copie;
+}
+
+/** 
+* @return DateTime
+**/
+public function getAnnoPubblicazione(){
+	 return $this->anno_pubblicazione;
+}
+
+/** 
+* @param DateTime $anno_pubblicazione
+**/
+public function setAnnoPubblicazione($anno_pubblicazione){
+	 $this->anno_pubblicazione = $anno_pubblicazione;
+}
+
+/** 
+* @return string
+**/
+public function getEditore(){
+	 return $this->editore;
+}
+
+/** 
+* @param string $editore
+* @param int $encodeType
+ **/
+public function setEditore($editore, $encodeType = self::STR_DEFAULT){
+	 $this->editore = $this->decodeString($editore, $encodeType);
 }
 
 

@@ -1,8 +1,8 @@
 <?php
 /**
 * Developed by: Alessandro Pericolo
-* Date: 14/01/2019
-* Time: 17:34
+* Date: 15/01/2019
+* Time: 09:23
 * Version: 0.1
 **/
 
@@ -12,9 +12,9 @@ class SottocategoriaModel extends AbstractModel {
 
 /** @var integer PrimaryKey */
 protected $id;
-/** @var integer */
+/** @var string */
 protected $codice_categoria;
-/** @var integer */
+/** @var string */
 protected $codice;
 /** @var string */
 protected $descrizione;
@@ -113,14 +113,14 @@ public function createTable(){
 return $this->pdo->exec(
 "CREATE TABLE `sottocategoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codice_categoria` int(11) NOT NULL,
-  `codice` int(11) NOT NULL,
-  `descrizione` varchar(100) DEFAULT NULL,
+  `codice_categoria` varchar(3) NOT NULL,
+  `codice` varchar(3) NOT NULL,
+  `descrizione` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `codice` (`codice`),
-  KEY `fk_categoriasottocategoria_idx` (`codice_categoria`),
-  CONSTRAINT `fk_categoriasottocategoria` FOREIGN KEY (`codice_categoria`) REFERENCES `categoria` (`codice`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1"
+  KEY `index_codice_cat` (`codice_categoria`),
+  KEY `index_codice` (`codice`),
+  CONSTRAINT `fk_categoriasottocategoria_1` FOREIGN KEY (`codice_categoria`) REFERENCES `categoria` (`codice`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1"
 );
 }
 
@@ -141,31 +141,33 @@ public function setId($id){
 }
 
 /** 
-* @return integer
+* @return string
 **/
 public function getCodiceCategoria(){
 	 return $this->codice_categoria;
 }
 
 /** 
-* @param integer $codice_categoria
-**/
-public function setCodiceCategoria($codice_categoria){
-	 $this->codice_categoria = $codice_categoria;
+* @param string $codice_categoria
+* @param int $encodeType
+ **/
+public function setCodiceCategoria($codice_categoria, $encodeType = self::STR_DEFAULT){
+	 $this->codice_categoria = $this->decodeString($codice_categoria, $encodeType);
 }
 
 /** 
-* @return integer
+* @return string
 **/
 public function getCodice(){
 	 return $this->codice;
 }
 
 /** 
-* @param integer $codice
-**/
-public function setCodice($codice){
-	 $this->codice = $codice;
+* @param string $codice
+* @param int $encodeType
+ **/
+public function setCodice($codice, $encodeType = self::STR_DEFAULT){
+	 $this->codice = $this->decodeString($codice, $encodeType);
 }
 
 /** 

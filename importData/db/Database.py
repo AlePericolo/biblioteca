@@ -1,9 +1,10 @@
+import conf
 import MySQLdb
 
 class Database:
 
     def __init__(self):
-        self.connection = MySQLdb.connect("127.0.0.1", "root", "Password14!", "biblioteca")
+        self.connection = MySQLdb.connect(conf.HOST, conf.USER , conf.PASSWORD ,conf.DBNAME )
         self.cursor = self.connection.cursor()
 
     # insert categoria ----------------------------------------------------------------------------------------------------

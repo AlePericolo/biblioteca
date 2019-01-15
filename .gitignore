@@ -6,3 +6,7 @@ importData/file/\.~lock\.biblioteca\.docx#
 showData/conf/conf\.php
 
 *.xml
+
+\.idea/
+
+importData/db/conf\.py

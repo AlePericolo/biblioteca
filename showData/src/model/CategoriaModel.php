@@ -1,8 +1,8 @@
 <?php
 /**
 * Developed by: Alessandro Pericolo
-* Date: 14/01/2019
-* Time: 17:34
+* Date: 15/01/2019
+* Time: 09:23
 * Version: 0.1
 **/
 
@@ -12,7 +12,7 @@ class CategoriaModel extends AbstractModel {
 
 /** @var integer PrimaryKey */
 protected $id;
-/** @var integer */
+/** @var string */
 protected $codice;
 /** @var string */
 protected $descrizione;
@@ -108,11 +108,11 @@ public function createTable(){
 return $this->pdo->exec(
 "CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codice` int(11) NOT NULL,
+  `codice` varchar(3) NOT NULL,
   `descrizione` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1"
+  KEY `index_codice` (`codice`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1"
 );
 }
 
@@ -133,17 +133,18 @@ public function setId($id){
 }
 
 /** 
-* @return integer
+* @return string
 **/
 public function getCodice(){
 	 return $this->codice;
 }
 
 /** 
-* @param integer $codice
-**/
-public function setCodice($codice){
-	 $this->codice = $codice;
+* @param string $codice
+* @param int $encodeType
+ **/
+public function setCodice($codice, $encodeType = self::STR_DEFAULT){
+	 $this->codice = $this->decodeString($codice, $encodeType);
 }
 
 /** 
