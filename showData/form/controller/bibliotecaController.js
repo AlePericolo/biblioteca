@@ -7,6 +7,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
     var handler = url.split("biblioteca.html");
 
     $scope.showFilters = false;
+    $scope.fileName = "BiblioteCAT";
 
     //first function
     $scope.init = function(){
@@ -113,6 +114,18 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
     $scope.scaricaPDF = function (testi) {
         console.log("aaa");
         console.log(testi);
+        var doc = new jsPDF();
+
+        // Or JavaScript:
+        doc.autoTable({
+            head: [['Name', 'Email', 'Country']],
+            body: [
+                ['David', 'david@example.com', 'Sweden'],
+                ['Castille', 'castille@example.com', 'Norway']
+            ]
+        });
+
+        doc.save($scope.fileName + '.pdf');
     }
 
 }]);

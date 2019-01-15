@@ -16,6 +16,12 @@
     <link rel="stylesheet" type="text/css" href="../grafica/sweetalert/sweetalert.min.css">
     <!--angularjs-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!--EXPORT-->
+    <!--pdf-->
+    <script src="https://unpkg.com/jspdf@1.5.3/dist/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.0.2/dist/jspdf.plugin.autotable.js"></script>
+    <!--csv-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js"></script>
     <!--controller-->
     <script src="controller/bibliotecaController.js"></script>
     <!--favicon-->
@@ -43,6 +49,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#" ng-click="scaricaPDF(filtered)">PDF <span class="float-right"><i class="fas fa-file-pdf"></i></span> </a>
                             <a class="dropdown-item" href="#">CSV <span class="float-right"><i class="fas fa-file-csv"></i></span></a>
+                            <a class="dropdown-item" href="#"><input class="form-control" ng-model="fileName"></a>
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-warning btn-sm float-right mt-3 ml-3" ng-click="showFilters = !showFilters">
