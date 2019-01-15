@@ -93,6 +93,19 @@ function eliminaTesto($request){
     return json_encode($result);
 }
 
+function aggiornaElencoTesti($request){
+
+    //error_log('aggiornaElencoTesti');
+    $result = array();
+
+    $pdo = connettiPdo();
+    $testo =  new Testo($pdo);
+
+    $result['testi'] = $testo->findAlldescCatSott(Testo::FETCH_KEYARRAY);
+
+    return json_encode($result);
+}
+
 ob_start();
 session_start();
 $postdata = file_get_contents("php://input");

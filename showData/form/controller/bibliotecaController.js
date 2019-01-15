@@ -55,7 +55,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     },
                     function(isConfirm){
                         if (isConfirm){
-                            window.location.reload();
+                            $scope.aggiornaElencoTesti();
                         }
                     });
             }else{
@@ -68,7 +68,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     },
                     function(isConfirm){
                         if (isConfirm){
-                            window.location.reload();
+                            $scope.aggiornaElencoTesti();
                         }
                     });
             }
@@ -92,13 +92,22 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     ).then(function (data) {
                         console.log(data.data);
                         if(data.data.response === "OK"){
-                            window.location.reload();
+                            $scope.aggiornaElencoTesti();
                         }else{
                             swal("Errore eliminazione!", data.data.message, "warning");
                         }
                     });
                 }
             });
-    }
+    };
+
+    $scope.aggiornaElencoTesti = function () {
+        $http.post(handler[0] + "/controller/bibliotecaHandler.php",
+            {'function': 'aggiornaElencoTesti'}
+        ).then(function (data) {
+            console.log(data.data);
+            $scope.testi = data.data.testi;
+        });
+    };
 
 }]);
