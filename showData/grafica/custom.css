@@ -6,3 +6,8 @@
 }
 .height71{height: 71vh}
 .height85{height: 85vh}
+.modal-lg {
+    max-width: 50%;
+}
+.mt-10p{margin-top: 10%;}
+.justifyCenter{justify-content: space-evenly !important;}
