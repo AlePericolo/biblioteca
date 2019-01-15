@@ -15,15 +15,26 @@ function __construct(PDO $pdo){
 	parent::__construct($pdo);
 }
 
-public function findAlldescCatSott($typeResult = self::FETCH_OBJ)
-{
-    $query = "select testo.*, categoria.descrizione as cat_desc, sottocategoria.descrizione as sott_desc
-                from testo
-                inner join categoria on testo.codice_categoria = categoria.codice
-                inner join sottocategoria on testo.codice_sottocategoria = sottocategoria.codice
-                order by testo.codice_categoria, testo.codice_sottocategoria";
+    public function findAlldescCatSott($typeResult = self::FETCH_OBJ){
+        $query = "select testo.*, categoria.descrizione as cat_desc, sottocategoria.descrizione as sott_desc
+                    from testo
+                    inner join categoria on testo.codice_categoria = categoria.codice
+                    inner join sottocategoria on testo.codice_sottocategoria = sottocategoria.codice
+                    order by testo.codice_categoria, testo.codice_sottocategoria";
 
-    return $this->createResultArray($query, null, $typeResult);
-}
+        return $this->createResultArray($query, null, $typeResult);
+    }
+
+    public function getMaxId(){
+        $query = "select max(id)+1 from testo";
+
+        return $this->createResultValue($query, null);
+    }
+
+    public static function getMaxIdStatic($pdo){
+        $app = new self($pdo);
+
+        return $app->getMaxId();
+    }
 
 } //close Class Testo

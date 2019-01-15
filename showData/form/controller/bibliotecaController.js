@@ -110,4 +110,9 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
         });
     };
 
+    $scope.scaricaPDF = function (testi) {
+        console.log("aaa");
+        console.log(testi);
+    }
+
 }]);

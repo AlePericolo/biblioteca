@@ -19,8 +19,8 @@
     <!--controller-->
     <script src="controller/bibliotecaController.js"></script>
     <!--favicon-->
-    <link rel='shortcut icon' type='image/x-icon' href='../grafica/book.ico'/>
-    <title>Biblioteca</title>
+    <link rel='shortcut icon' type='image/x-icon' href='../grafica/cat.ico'/>
+    <title>BiblioteCAT</title>
 </head>
 <body ng-app="biblioApp">
 
@@ -29,17 +29,28 @@
     <div class="container-fluid">
         <div class="row mt-1">
             <div class="col-md-1">
-                <button type="button" class="btn btn-outline-success btn-sm mt-3 ml-2" title="Aggiungi nuovo testo" data-toggle="modal" data-target="#dettaglioTesto" ng-click="getDettagliTesto(-1)">
+                <button type="button" class="btn btn-outline-success btn-sm mt-3 ml-4" title="Aggiungi nuovo testo" data-toggle="modal" data-target="#dettaglioTesto" ng-click="getDettagliTesto(-1)">
                     Aggiungi nuovo&nbsp;<i class="fas fa-plus-square"></i>
                 </button>
             </div>
-            <div class="col-md-10"><h1 class="text-center display-4"><u class="text-danger"> <i class="fas fa-cat"></i>&nbsp; BiblioteCAT:</u> {{testi.length}} testi totali.</h1></div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-outline-warning btn-sm float-right mt-3 mr-2" ng-click="showFilters = !showFilters">
-                    <span ng-if="!showFilters">Mostra</span>
-                    <span ng-show="showFilters">Nascondi</span>
-                    &nbsp;filtri&nbsp;<i class="fas fa-filter"></i>
-                </button>
+            <div class="col-md-9">
+                <h1 class="text-center display-4"><u class="text-danger"> <i class="fas fa-cat"></i>&nbsp; BiblioteCAT:</u> {{testi.length}} testi totali.</h1>
+            </div>
+            <div class="col-md-2">
+                <div class="form-inline">
+                    <div class="input-group-prepend mt-3">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Scarica elenco&nbsp;<i class="fas fa-file-download"></i>&nbsp; </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" ng-click="scaricaPDF(filtered)">PDF <span class="float-right"><i class="fas fa-file-pdf"></i></span> </a>
+                            <a class="dropdown-item" href="#">CSV <span class="float-right"><i class="fas fa-file-csv"></i></span></a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-warning btn-sm float-right mt-3 ml-3" ng-click="showFilters = !showFilters">
+                        <span ng-if="!showFilters">Mostra</span>
+                        <span ng-show="showFilters">Nascondi</span>
+                        &nbsp;filtri&nbsp;<i class="fas fa-filter"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row p-2" ng-show="showFilters">
