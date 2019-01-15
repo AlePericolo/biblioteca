@@ -25,7 +25,7 @@ function caricaDati($request){
 
     $result['categorie'] = $categoria->findAll(false, Categoria::FETCH_KEYARRAY);
     $result['sottocategorie'] = $sottocategoria->findAll(false, Sottocategoria::FETCH_KEYARRAY);
-    $result['testi'] = $testo->findAll(false, Testo::FETCH_KEYARRAY);
+    $result['testi'] = $testo->findAlldescCatSott(Testo::FETCH_KEYARRAY);
 
     return json_encode($result);
 }

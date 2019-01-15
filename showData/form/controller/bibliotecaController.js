@@ -6,11 +6,14 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
     var url = window.location.href;
     var handler = url.split("biblioteca.html");
 
+    $scope.showFilters = false;
+    $scope.categoriaSelezionata = "";
+
     //caricaDati
     $scope.init = function(){
+        $scope.pulisciFiltri();
         $scope.caricaDati();
     };
-
 
     $scope.caricaDati = function () {
         $http.post(handler[0] + "/controller/bibliotecaHandler.php",
@@ -23,7 +26,11 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
         });
     };
 
-    $scope.categoriaSelezionata = "";
-    $scope.sottocategoriaSelezionata = "";
+    $scope.pulisciFiltri = function () {
+        $scope.categoriaSelezionata = "";
+        $scope.sottocategoriaSelezionata = "";
+        $scope.search.titolo = "";
+        $scope.search.autore = "";
+    };
 
 }]);

@@ -135,11 +135,11 @@ return $this->pdo->exec(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codice_categoria` varchar(3) NOT NULL,
   `codice_sottocategoria` varchar(3) NOT NULL,
-  `autore` varchar(45) DEFAULT NULL,
-  `titolo` varchar(45) DEFAULT NULL,
+  `autore` varchar(80) DEFAULT NULL,
+  `titolo` varchar(255) DEFAULT NULL,
   `numero_copie` int(11) DEFAULT NULL,
   `anno_pubblicazione` datetime DEFAULT NULL,
-  `editore` varchar(45) DEFAULT NULL,
+  `editore` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
 );

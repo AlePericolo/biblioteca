@@ -115,7 +115,7 @@ return $this->pdo->exec(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codice_categoria` varchar(3) NOT NULL,
   `codice` varchar(3) NOT NULL,
-  `descrizione` varchar(45) DEFAULT NULL,
+  `descrizione` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_codice_cat` (`codice_categoria`),
   KEY `index_codice` (`codice`),

@@ -109,7 +109,7 @@ return $this->pdo->exec(
 "CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codice` varchar(3) NOT NULL,
-  `descrizione` varchar(45) DEFAULT NULL,
+  `descrizione` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_codice` (`codice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
