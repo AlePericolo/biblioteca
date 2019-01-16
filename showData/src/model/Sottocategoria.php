@@ -17,7 +17,7 @@ function __construct(PDO $pdo){
 
     public function findSottocategorie($typeResult = self::FETCH_OBJ)
     {
-        $query = "select codice_categoria, codice, concat(codice,' - ',descrizione) as descrizione from biblioteca.sottocategoria";
+        $query = "select codice_categoria, codice, concat(codice,' - ',descrizione) as descrizione from sottocategoria";
 
         return $this->createResultArray($query, null, $typeResult);
     }

@@ -6,6 +6,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
     var url = window.location.href;
     var handler = url.split("biblioteca.html");
 
+    $scope.caricamentoCompletato = false;
     $scope.showFilters = false;
     $scope.fileName = "BiblioteCAT";
 
@@ -22,6 +23,8 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
             $scope.categorie = data.data.categorie;
             $scope.sottocategorie = data.data.sottocategorie;
             $scope.testi = data.data.testi;
+        }).then(function () {
+            $scope.caricamentoCompletato = true;
         });
     };
 
@@ -56,6 +59,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     },
                     function(isConfirm){
                         if (isConfirm){
+                            $scope.caricamentoCompletato = false;
                             $scope.aggiornaElencoTesti();
                         }
                     });
@@ -69,6 +73,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     },
                     function(isConfirm){
                         if (isConfirm){
+                            $scope.caricamentoCompletato = false;
                             $scope.aggiornaElencoTesti();
                         }
                     });
@@ -93,6 +98,7 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
                     ).then(function (data) {
                         console.log(data.data);
                         if(data.data.response === "OK"){
+                            $scope.caricamentoCompletato = false;
                             $scope.aggiornaElencoTesti();
                         }else{
                             swal("Errore eliminazione!", data.data.message, "warning");
@@ -108,6 +114,8 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
         ).then(function (data) {
             console.log(data.data);
             $scope.testi = data.data.testi;
+        }).then(function () {
+            $scope.caricamentoCompletato = true;
         });
     };
 

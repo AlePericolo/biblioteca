@@ -25,6 +25,19 @@ function __construct(PDO $pdo){
         return $this->createResultArray($query, null, $typeResult);
     }
 
+    public function getNullKeyArray(){
+        $emptyKeyArray = array();
+        $emptyKeyArray["id"] = null;
+        $emptyKeyArray["codice_categoria"] = "";
+        $emptyKeyArray["codice_sottocategoria"] = "";
+        $emptyKeyArray["autore"] = "";
+        $emptyKeyArray["titolo"] = "";
+        $emptyKeyArray["numero_copie"] = "";
+        $emptyKeyArray["anno_pubblicazione"] = null;
+        $emptyKeyArray["editore"] = "";
+        return $emptyKeyArray;
+    }
+
     public function getMaxId(){
         $query = "select max(id)+1 from testo";
 

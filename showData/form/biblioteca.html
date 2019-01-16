@@ -35,6 +35,7 @@
 <div  ng-controller="bibliotecaController" data-ng-init="caricaDati()">
 
     <div class="container-fluid">
+        <!--header-->
         <div class="row mt-1">
             <div class="col-md-1">
                 <button type="button" class="btn btn-outline-success btn-sm mt-3 ml-4" title="Aggiungi nuovo testo" data-toggle="modal" data-target="#dettaglioTesto" ng-click="getDettagliTesto(-1)">
@@ -104,6 +105,7 @@
                 </div>
             </div>
         </div>
+        <!--dataheader-->
         <table class="table table-sm mb-0">
             <thead class="bg-info text-white">
                 <tr>
@@ -130,7 +132,14 @@
                 </tr>
             </thead>
         </table>
-        <div class="containerDataBody" ng-class="showFilters ? 'height71' : 'height85' ">
+        <!--loader-->
+        <div class="backgroundLoader" ng-class="showFilters ? 'height71' : 'height85' " ng-show="!caricamentoCompletato">
+            <div class="containerLoader">
+                <div class="loader"></div>
+            </div>
+        </div>
+        <!--databody-->
+        <div class="containerDataBody" ng-class="showFilters ? 'height71' : 'height85' " ng-show="caricamentoCompletato">
             <table class="table table-sm table-hover">
                 <tbody class="bg-light">
                     <tr ng-repeat="t in testi | filter:{ codice_categoria: categoriaSelezionata } | filter:{ codice_sottocategoria: sottocategoriaSelezionata } | filter:search as filtered">

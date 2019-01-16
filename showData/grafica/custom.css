@@ -11,3 +11,32 @@
 }
 .mt-10p{margin-top: 10%;}
 .justifyCenter{justify-content: space-evenly !important;}
+/* ------------------------------------------------------ LOADER ---------------------------------------------------- */
+.backgroundLoader{
+    background: rgba(185, 190, 223, 0.6); !important;
+    z-index: 10;
+    width: 100%;
+}
+.containerLoader{
+    z-index: 10;
+    padding-top: 12%;
+}
+.loader {
+    border: 30px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 30px solid #0083a9;
+    width: 200px;
+    height: 200px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    z-index: 10;
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

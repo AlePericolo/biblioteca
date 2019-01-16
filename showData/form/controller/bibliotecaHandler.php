@@ -42,7 +42,7 @@ function getDettagliTesto($request){
     if($request->idTesto != -1)
         $result['testo'] = $testo->findByPk($request->idTesto, Testo::FETCH_KEYARRAY);
     else
-        $result['testo'] = $testo->getEmptyKeyArray();
+        $result['testo'] = $testo->getNullKeyArray();
 
     return json_encode($result);
 }
