@@ -1,5 +1,5 @@
 
-var app = angular.module('biblioApp', []);
+var app = angular.module('biblioApp', ['ngSanitize', 'ngCsv']);
 
 app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $http) {
 
@@ -112,20 +112,54 @@ app.controller('bibliotecaController', ['$scope', '$http', function ($scope, $ht
     };
 
     $scope.scaricaPDF = function (testi) {
-        console.log("aaa");
         console.log(testi);
-        var doc = new jsPDF();
-
-        // Or JavaScript:
+        var doc = new jsPDF('L');
+        var header = function (data) {
+            doc.setFontSize(12);
+            doc.text("Biblioteca di Alessandra Salvoldi", 5, 7);
+        };
         doc.autoTable({
-            head: [['Name', 'Email', 'Country']],
-            body: [
-                ['David', 'david@example.com', 'Sweden'],
-                ['Castille', 'castille@example.com', 'Norway']
-            ]
+            head: $scope.getHeaderTable(),
+            body: $scope.creaFileDaScaricare(testi),
+            pageBreak: 'avoid',
+            tableWidth: 290,
+            margin:{left: 5, top: 10, right: 5, bottom: 5},
+            beforePageContent: header,
+            styles: {
+                cellPadding: 1,
+                fontSize: 10,
+                overflow: 'linebreak'
+            },
+            columnStyles: {
+                0: {columnWidth: 'auto'},
+                1: {columnWidth: 'auto'},
+                2: {columnWidth: 80},
+                3: {columnWidth: 60},
+                4: {columnWidth: 'auto'},
+                5: {columnWidth: 'auto'},
+                6: {columnWidth: 'auto'},
+                7: {columnWidth: 'auto'}
+            }
         });
-
         doc.save($scope.fileName + '.pdf');
-    }
+    };
+
+    $scope.getHeaderTable = function () {return [["CAT", "SOTT", "Titolo", "Autore", "Editore", "Anno", "N°copie"]];};
+
+    $scope.creaFileDaScaricare = function(data){
+        $scope.fileExport = new Array();
+        for(i=0; i<data.length; i++){
+            app = new Array();
+            app.push(data[i].codice_categoria);
+            app.push(data[i].codice_sottocategoria);
+            app.push(data[i].titolo);
+            app.push(data[i].autore);
+            app.push(data[i].editore != null ? data[i].editore : '');
+            app.push(data[i].anno_pubblicazione != null ? data[i].anno_pubblicazione : '');
+            app.push(data[i].numero_copie);
+            $scope.fileExport.push(app);
+        }
+        return $scope.fileExport;
+    };
 
 }]);

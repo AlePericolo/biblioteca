@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="../grafica/sweetalert/sweetalert.min.css">
     <!--angularjs-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!--angularjs sanitize-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.9/angular-sanitize.min.js"></script>
     <!--EXPORT-->
     <!--pdf-->
     <script src="https://unpkg.com/jspdf@1.5.3/dist/jspdf.min.js"></script>
@@ -47,9 +49,26 @@
                     <div class="input-group-prepend mt-3">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Scarica elenco&nbsp;<i class="fas fa-file-download"></i>&nbsp; </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" ng-click="scaricaPDF(filtered)">PDF <span class="float-right"><i class="fas fa-file-pdf"></i></span> </a>
-                            <a class="dropdown-item" href="#">CSV <span class="float-right"><i class="fas fa-file-csv"></i></span></a>
-                            <a class="dropdown-item" href="#"><input class="form-control" ng-model="fileName"></a>
+                            <a class="dropdown-item" href="#" ng-click="scaricaPDF(filtered)">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">PDF</div>
+                                    <div class="col-md-5 text-center"><i class="fas fa-file-pdf"></i></div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#" ng-csv="creaFileDaScaricare(filtered)" csv-header="getHeaderTable()" filename="{{fileName}}.csv" field-separator=";" decimal-separator=".">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">CSV</div>
+                                    <div class="col-md-5 text-center"><i class="fas fa-file-csv"></i></div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <label for="fileName" class="input-group-text font-weight-bold pl-2 pr-2"> Nome file </label>
+                                    </div>
+                                    <input id="fileName" type="text" class="form-control" ng-model="fileName">
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-warning btn-sm float-right mt-3 ml-3" ng-click="showFilters = !showFilters">
